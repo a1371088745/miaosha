@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dt87.miaosha.mapper.OrderInfoMapper">
+    <insert id="insertOrderInfo" useGeneratedKeys="true" keyProperty="id" parameterType="OrderInfo">
+        insert into order_info(user_id, goods_id, goods_name, goods_count, goods_price, goods_channel, status,
+        create_date,order_number)
+        values(#{orderInfo.userId}, #{orderInfo.goodsId}, #{orderInfo.goodsName}, #{orderInfo.goodsCount},
+        #{orderInfo.goodsPrice},
+        #{orderInfo.goodsChannel},#{orderInfo.status},#{orderInfo.createDate},#{orderInfo.orderNumber})
+    </insert>
+    <select id="selectOrderInfo" resultType="OrderInfo">
+        select * from order_info where user_id=#{userId} and goods_id=#{goodsId}
+    </select>
+    <select id="selectOrderInfoById" resultType="OrderInfo">
+        select * from order_info where id=#{orderInfoId}
+    </select>
+    <update id="updateOrderState">
+        update order_info set status=1 where order_number=#{orderNum}
+    </update>
+</mapper>
